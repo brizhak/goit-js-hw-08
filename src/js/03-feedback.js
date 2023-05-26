@@ -30,7 +30,7 @@ function onFormElSubmit(event) {
     localStorage.clear();
     emailEl.value = '';
     messageEl.value = '';
-}
+};
 
 formEl.addEventListener('submit', onFormElSubmit);
 
