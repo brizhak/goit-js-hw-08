@@ -1,8 +1,6 @@
 import _ from 'lodash';
 
 const formEl = document.querySelector('form');
-const emailEl = document.querySelector('input');
-const messageEl = document.querySelector('textarea');
 
 const storageData = JSON.parse(localStorage.getItem('feedback-form-state'));
 if (storageData !== null) {
@@ -18,18 +16,20 @@ const updateLocalStorage = _.throttle(() => {
     localStorage.setItem('feedback-form-state', JSON.stringify(feedbackFormState));
 }, 500);
 
-function onFormElInput () {
-    updateLocalStorage ();
+function onFormElInput (event) {
+    const target = event.target;
+    if (target.matches('input') || target.matches('textarea')) {
+        updateLocalStorage();
+    };
 };
 
-emailEl.addEventListener('input', onFormElInput);
-messageEl.addEventListener('input', onFormElInput);
+formEl.addEventListener('input', onFormElInput);
 
 function onFormElSubmit(event) {
     event.preventDefault();
-    localStorage.clear();
-    emailEl.value = '';
-    messageEl.value = '';
+    console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+    formEl.reset();
+    localStorage.removeItem('feedback-form-state');
 };
 
 formEl.addEventListener('submit', onFormElSubmit);
