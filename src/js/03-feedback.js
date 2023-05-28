@@ -1,6 +1,8 @@
 import _ from 'lodash';
 
 const formEl = document.querySelector('form');
+const emailEl = document.querySelector('input'); 
+const messageEl = document.querySelector('textarea');
 
 const storageData = JSON.parse(localStorage.getItem('feedback-form-state'));
 if (storageData !== null) {
